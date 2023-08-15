@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+    background-image:url("/imgs/elements/scroll.jpg");    
+    width: 22px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(145, 240, 142, 0.947);
+    border-radius: 2rem;
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: greenyellow;
+}
