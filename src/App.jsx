@@ -31,12 +31,12 @@ function App() {
     callAxios(randomdimension)
   }, [])
   return (    
-    <main className={`bg-[url(/imgs/fondo.png)]  min-h-screen  grid  justify-center    `} >
+    <main className={`bg-[url(/imgs/fondo.png)]  min-h-screen  grid  justify-center`} >
       <header>
         {
           dimension?.residents.length === 0 ?
             <div>
-              <h1 className=' mt-10 font-fira h-[6rem] flex justify-center items-center p-[1rem] m-[1rem] rounded-2xl border-8 border-green-500 bg-gradient-to-r from-green-300 to-green-600'>Lo sentimos, aqui no hay habitantes, intenta de nuevo!</h1>
+              <h1 className=' mt-10 font-fira h-[6rem] flex justify-center items-center p-[1rem] m-[1rem] rounded-2xl border-8 border-green-500 bg-gradient-to-r from-green-300 to-green-600'>Lo sentimos, aqui no hay habitantes, <span className='font-bold'> Recarga de nuevo</span></h1>
               <img className='rounded-full' src="/imgs/elements/nohabitantes.jpg" alt="Sin Habitantes" />
             </div>
             :
