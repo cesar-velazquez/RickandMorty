@@ -4,6 +4,11 @@ import React, { useEffect, useState } from 'react'
 const ResidentCard = ({ residentUrl }) => {
   const [infresident, setInfresident] = useState(null)
 
+  const residentStatus = {
+    Alive: "bg-green-300",
+    Dead: "bg-red-600",
+    unknown: "bg-slate-400"
+  }
 
   useEffect(() => {
     axios
@@ -12,30 +17,13 @@ const ResidentCard = ({ residentUrl }) => {
       .catch((err) => console.log(err))
   }, [])
   return (
-
-    // //  <div className='bg-red-500 grid grid-cols-2 '>          
-    // {/* <div className=' bg-orange-400 w-[300px]'>       */}
       <article className='w-[300px] border-[2px] border-green-400 pt-2 mb-8 mx-1 '>
         <header >
           <img className='' src={infresident?.image} alt="" />
-          {
-            infresident?.status == 'Dead' && <div className='flex items-center gap-2 p-3 py-4 m-5 text-white border-2 h-5 w-[30%]'>
-              <div className='h-[10px] aspect-square bg-red-500 rounded-full' ></div>
+          <div className='flex items-center gap-2 p-3 py-4 m-5 text-white border-2 h-5 w-[40%]'>
+              <div className={`h-[10px] aspect-square ${residentStatus[infresident?.status]} rounded-full`} ></div>
               {infresident?.status}
-            </div>
-          }
-          {
-            infresident?.status == 'Alive' && <div className='flex items-center gap-2 p-3 py-4 m-5 text-white border-2 h-5 w-[30%]'>
-              <div className='h-[10px] aspect-square bg-green-300 rounded-full' ></div>
-              {infresident?.status}
-            </div>
-          }
-          {
-            infresident?.status == 'unknown' && <div className='flex items-center gap-2 p-3 py-4 m-5 text-white border-2 h-5 w-[40%]'>
-              <div className='h-[10px] aspect-square bg-gray-700 rounded-full' ></div>
-              {infresident?.status}
-            </div>
-          }
+            </div>          
         </header>
         <section className='font-fira'>
           <h3 className='text-[#FBFBFB] text-[25px] h-[40px] text-center shrink-0 font-bold mb-5 sm:text-[26px] sm:mb-10 ' >{infresident?.name}</h3>
@@ -46,8 +34,6 @@ const ResidentCard = ({ residentUrl }) => {
           </ul>
         </section>
       </article>
-    // {/* </div> */}
-    // // </div>
   )
 }
 

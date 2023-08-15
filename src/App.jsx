@@ -53,7 +53,7 @@ function App() {
         <LocationForm handleSubmit={handleSubmit} />
       </section>
       <section>
-        <ResidentList residents={dimension?.residents ?? []} />
+        <ResidentList residents={dimension?.residents ?? []} dimension={dimension} />
       </section>
     </main>
 
