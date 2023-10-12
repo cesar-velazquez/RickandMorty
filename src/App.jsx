@@ -11,6 +11,8 @@ function App() {
   const [results, setResults] = useState([])
   const [dimension, setDimension] = useState(null);
   const [select, setSelect] = useState(null);
+  
+
 
   const handleChange = (e) => {
     const dimensionSearch = e.target.value;
@@ -55,23 +57,25 @@ function App() {
     <main className={`bg-[url(/imgs/fondo.png)] min-h-screen
     grid justify-center`} >
       <header>
-        {
-          dimension?.residents.length === 0 ?
-            <div>
-              <h1 className=' mt-10 font-fira h-[6rem] flex justify-center items-center p-[1rem] m-[1rem] 
-              rounded-2xl border-8 border-green-500 bg-gradient-to-r from-green-300 to-green-600'
-              >Lo sentimos, aqui no hay habitantes, Recarga de nuevo</h1>
-              <img className='rounded-full' src="/imgs/elements/nohabitantes.jpg"
-                alt="Sin Habitantes" />
-            </div>
-            :
-            <div>
-              <div className=' flex justify-center '>
-                <img className='absolute top-0 sm:h-[200px]' src="/imgs/elements/bolaverde.png" alt="" />
-                <img className='z-10' src="/imgs/elements/nombre.png" alt="" />
-              </div>
-            </div>
-        }
+        {dimension?.residents?.length === 0 || select?.residents?.length === 0 ? (
+          <div>
+            <h1 className='mt-10 font-fira h-[6rem] flex justify-center items-center p-[1rem] m-[1rem] 
+    rounded-2xl border-8 border-green-500 bg-gradient-to-r from-green-300 to-green-600'>
+              Sorry, there are no inhabitants here, <a href='/' className='hover:font-semibold underline'>Recharge again</a>
+            </h1>
+            <img className='rounded-full mx-auto max-w-[30%] ' src="/imgs/elements/nohabitantes.jpg"
+              alt="Sin Habitantes" />
+          </div>
+        ) : (
+          <div className='flex justify-center'>
+            <img className='absolute top-0 sm:h-[200px]' src="/imgs/elements/bolaverde.png" alt="" />
+            <img className='z-10' src="/imgs/elements/nombre.png" alt="" />
+          </div>
+        )}
+
+
+
+
         <LocationInfo select={select} dimension={dimension} />
       </header>
 
@@ -79,16 +83,31 @@ function App() {
         <div className=' flex justify-center mt-10 pt-1 px-4'>
           <i className='bx bx-tada bxs-planet bx-border-circle
           border-black border-solid bg-white p-2 sm:mr-3'></i>
-          <input
+          {
+            dimension?.residents?.length === 0 ?
+            <input
             id='search'
+            disabled
             onChange={handleChange}
             value={word}
             className=' text-center border-2 border-r-0 border-green-400 focus:border-4
             focus:border-green-400 sm:w-[70%] max-w-xl outline-none'
             type="text"
-            placeholder='Search a location...'
+            placeholder='Recharge again...'
             autoComplete='off'
           />
+          :
+          <input
+          id='search'
+          onChange={handleChange}
+          value={word}
+          className=' text-center border-2 border-r-0 border-green-400 focus:border-4
+          focus:border-green-400 sm:w-[70%] max-w-xl outline-none'
+          type="text"
+          placeholder='Search a location...'
+          autoComplete='off'
+        />
+          }
         </div>
 
         <article className='max-w-[400px] m-auto '>
@@ -114,18 +133,18 @@ function App() {
           )}
         </article>
 
-        <p className=' text-[#8EFF8B] bg-white/40 rounded-3xl p-4 text-center font-fira text-[15px]
-        font-medium leading-normal my-7 '> ¡Welcome to the crazy universe of: 
-        {select === null ? 
-        <span className='flex justify-center' >{dimension?.name}</span> 
-        : 
-        <span className='flex justify-center'>{ select?.name}</span>  } </p>
+        <p className=' text-[#8EFF8B] bg-black/70 rounded-3xl p-4 text-center font-fira text-[15px]
+        font-medium leading-normal my-7 '> ¡Welcome to the crazy universe of:
+          {select === null ?
+            <span className='flex justify-center font-semibold text-xl' >"{dimension?.name}"</span>
+            :
+            <span className='flex justify-center font-semibold text-xl'>"{select?.name}"</span>} </p>
       </section>
 
       <section>
-        <ResidentList 
-        selectResidents={select?.residents ?? []} select={select}
-        residents={dimension?.residents ?? []} dimension={dimension} />
+        <ResidentList
+          selectResidents={select?.residents ?? []} select={select}
+          residents={dimension?.residents ?? []} dimension={dimension} />
       </section>
     </main>
 
